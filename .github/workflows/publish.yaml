@@ -47,7 +47,9 @@ jobs:
       - name: Add custom openai url
         run: |
           sed -i "/openai.proxy/a\ \ \ \ \ \ \ \ openai.api_base = config['api_base']" bot/openai_helper.py
+          sed -i "/openai.proxy/a\ \ \ \ \ \ \ \ openai.api_type = config['api_type']" bot/openai_helper.py
           sed -i "/'api_key':/a\ \ \ \ \ \ \ \ 'api_base': os.environ['OPENAI_API_BASE']," bot/main.py
+          sed -i "/'api_key':/a\ \ \ \ \ \ \ \ 'api_type': os.environ['OPENAI_API_TYPE']," bot/main.py
   
       - name: Build and push Docker images
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
